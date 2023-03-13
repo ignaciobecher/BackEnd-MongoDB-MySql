@@ -14,6 +14,7 @@ app.use(
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static("storage")); //permitir que el navegador muestre los archivos del storage
 app.listen(port, () => {
   console.log("App en linea en puerto: " + port);
 });
