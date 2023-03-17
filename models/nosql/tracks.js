@@ -48,4 +48,4 @@ const TracksScheme = new mongoose.Schema(
 
 //FORMA CORRECTA DE EXPORTAR MODELO
 const tracksModel = mongoose.model("tracks", TracksScheme);
-module.exports = { tracksModel };
+module.exports = { tracksModel, TracksScheme };
