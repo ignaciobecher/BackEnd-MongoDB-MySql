@@ -1,13 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { encrypt, compare } = require("../utils/handlePassword");
-
+const { registerController, loginController } = require("../controllers/auth");
 //localhost:3001/api/auth/register
-router.post("/register", async (req, res) => {
-  const { username, email, password } = req.body;
-  const passwordHash = await encrypt(password);
-  const body = { username, email, password: passwordHash };
-  res.json({ data: body });
-});
+router.post("/register", registerController);
+router.post("/login", loginController);
 
 module.exports = router;
