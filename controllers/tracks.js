@@ -6,9 +6,11 @@ const mongoose = require("mongoose");
 
 const getItems = async (req, res) => {
   try {
-    const data = await tracksModel.find({});
-    res.send({ data });
+    const user = req.user;
+    const data = await tracksModel.find();
+    res.send({ data, user });
   } catch (e) {
+    console.log(e);
     handleHttpError(res, "ERROR_GET_ITEMS");
   }
 };
@@ -47,27 +49,27 @@ const updateItem = async (req, res) => {
 };
 
 //ELimincacion total
-// const deleteItem = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const data = await tracksModel.deleteOne({ _id: id });
-//     res.send({ data });
-//     console.log("Elemento eliminado");
-//   } catch (e) {
-//     handleHttpError(res, "ERROR_DELETE_ITEM");
-//   }
-// };
-
-//Elimincacion logica
 const deleteItem = async (req, res) => {
   try {
     const { id } = req.params;
-    const data = await tracksModel.delete({ _id: id });
+    const data = await tracksModel.deleteOne({ _id: id });
     res.send({ data });
-    console.log("Elemento eliminado logicamente");
+    console.log("Elemento eliminado");
   } catch (e) {
     handleHttpError(res, "ERROR_DELETE_ITEM");
   }
 };
+
+//Elimincacion logica
+// const deleteItem = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const data = await tracksModel.delete({ _id: id });
+//     res.send({ data });
+//     console.log("Elemento eliminado logicamente");
+//   } catch (e) {
+//     handleHttpError(res, "ERROR_DELETE_ITEM");
+//   }
+// };
 
 module.exports = { getItems, getItem, createItem, updateItem, deleteItem };

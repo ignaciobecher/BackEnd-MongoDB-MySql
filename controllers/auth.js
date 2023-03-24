@@ -29,12 +29,11 @@ const loginController = async (req, res) => {
   const hashPassword = user.get("password"); //accedo a la contraseña hasheada
   const check = await compare(plainPassword, hashPassword); //compraro las contras
   if (!check) {
-    console.log("Error comparar contraseñas");
-  } else {
-    console.log("Contraseñas comparadas correctamente");
+    return null;
   }
+  user.set("password", undefined, { strict: false });
   const data = {
-    token: tokenSign(user),
+    token: await tokenSign(user),
     user,
   };
   res.send({ data });

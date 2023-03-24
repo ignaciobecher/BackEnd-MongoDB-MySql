@@ -8,6 +8,7 @@ const {
   updateItem,
   deleteItem,
 } = require("../controllers/tracks");
+const authMiddleware = require("../middleware/session");
 const validatorCreateItem = require("../validators/tracks");
 
 //http://localhost/tracks
